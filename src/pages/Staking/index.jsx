@@ -522,7 +522,7 @@ const Staking = ({ setNotification }) => {
                   lineHeight={"130%"}
                 >
                   {!account ? (
-                    "0.000"
+                    "0.000000"
                   ) : claimable !== undefined ? (
                     (claimable / Math.pow(10, 18)).toFixed(6)
                   ) : (
@@ -588,7 +588,7 @@ const Staking = ({ setNotification }) => {
                   lineHeight={"130%"}
                 >
                   {!account ? (
-                    "0.000"
+                    "0.000000"
                   ) : accountlockinfo.emission !== undefined ? (
                     (accountlockinfo.emission / Math.pow(10, 18)).toFixed(6)
                   ) : (
@@ -630,7 +630,7 @@ const Staking = ({ setNotification }) => {
                   lineHeight={"130%"}
                 >
                   {!account ? (
-                    "0.000"
+                    "0.000000"
                   ) : accountlockinfo[activeDay].pendingDividends !==
                     undefined ? (
                     accountlockinfo[activeDay].pendingDividends.toFixed(3)
@@ -702,7 +702,7 @@ const Staking = ({ setNotification }) => {
               lineHeight={"130%"}
             >
               {!account ? (
-                "0.000"
+                "0.000000"
               ) : accountlockinfo.balance !== undefined ? (
                 (accountlockinfo.balance / Math.pow(10, 18)).toFixed(6)
               ) : (

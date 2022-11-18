@@ -324,7 +324,7 @@ const Dashboard = ({ setNotification }) => {
                   lineHeight={"130%"}
                 >
                   {!account ? (
-                    "0.000"
+                    "0.000000"
                   ) : lockinfo.totalStaked !== undefined ? (
                     (lockinfo.totalStaked / Math.pow(10, 18)).toFixed(6)
                   ) : (
@@ -366,7 +366,7 @@ const Dashboard = ({ setNotification }) => {
                   lineHeight={"130%"}
                 >
                   {!account ? (
-                    "0.000"
+                    "0.000000"
                   ) : accountlockinfo[activeDay].pendingDividends !==
                     undefined ? (
                     accountlockinfo[activeDay].pendingDividends.toFixed(3)
@@ -438,7 +438,7 @@ const Dashboard = ({ setNotification }) => {
               lineHeight={"130%"}
             >
               {!account ? (
-                "0.000"
+                "0.000000"
               ) : lockinfo.interest / Math.pow(10, 16) !== undefined ? (
                 (lockinfo.interest / Math.pow(10, 16)).toFixed(2) + "%"
               ) : (
