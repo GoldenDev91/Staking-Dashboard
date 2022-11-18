@@ -514,7 +514,7 @@ const Staking = ({ setNotification }) => {
           <Panel my={"24px"}>
             <RewardPanel>
               <Box>
-                <Box fontWeight={"500"}>ERC20 Claimable </Box>
+                <Box fontWeight={"500"}>ERC20 Claimable (estimated)</Box>
                 <Box
                   fontWeight={"bold"}
                   fontSize={"32px"}
