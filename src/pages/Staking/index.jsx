@@ -22,6 +22,7 @@ import useTokenInfo from "../../hooks/useTokenInfo";
 import { getLockContract, getTokenContract } from "../../utils/contracts";
 import { figureError } from "../../utils/functions";
 import { numberWithCommas } from "../../utils/functions";
+import { useEffect } from "react";
 
 // const lockcompound = [
 //   [38.65 / 32.69, 38.53 / 32.69, 38.39 / 32.69, 38.07 / 32.69],
@@ -52,6 +53,21 @@ const Staking = ({ setNotification }) => {
   const [withdrawAmount, setWithdrawAmount] = useState("");
 
   const [activeDay, setActiveDay] = useState(0);
+
+  const [claimable, setClaimable] = useState(0);
+
+  const calcClaimable = () => {
+    const timePassed = Date.now() / 1000 - accountlockinfo.depositDate;
+    const claim =
+      (accountlockinfo.balance * lockinfo.interest * timePassed) /
+      365 /
+      86400 /
+      Math.pow(10, 18);
+    if (!isNaN(claim)) setClaimable(claim);
+  };
+  // setInterval(() => calcClaimable(), 5000);
+
+  useEffect(() => calcClaimable(), [accountlockinfo]);
 
   function numberWithCommas(x) {
     if (!x) return;
@@ -232,7 +248,23 @@ const Staking = ({ setNotification }) => {
         };
         harvestTx = await LockContract.claim(tx);
       }
-      await harvestTx.wait();
+      const claimed = await harvestTx.wait();
+      // console.log('claimed :>> ', claimed);
+      // if (claimed === 0) {
+      //   setNotification({
+      //     type: "error",
+      //     title: "Error",
+      //     detail: "Nothing to claim.",
+      //   });
+      // } else {
+      //   setNotification({
+      //     type: "success",
+      //     title: "Success",
+      //     detail: `${(claimed / Math.pow(10, 18)).toFixed(
+      //       6
+      //     )} $TestToken claimed.`,
+      //   });
+      // }
       fetchAccountLockData();
       fetchLockData();
     } catch (error) {
@@ -482,7 +514,7 @@ const Staking = ({ setNotification }) => {
           <Panel my={"24px"}>
             <RewardPanel>
               <Box>
-                <Box fontWeight={"500"}>ERC20 Earned </Box>
+                <Box fontWeight={"500"}>ERC20 Claimable </Box>
                 <Box
                   fontWeight={"bold"}
                   fontSize={"32px"}
@@ -491,8 +523,8 @@ const Staking = ({ setNotification }) => {
                 >
                   {!account ? (
                     "0.000"
-                  ) : accountlockinfo.emission !== undefined ? (
-                    (accountlockinfo.emission / Math.pow(10, 18)).toFixed(6)
+                  ) : claimable !== undefined ? (
+                    (claimable / Math.pow(10, 18)).toFixed(6)
                   ) : (
                     <Skeleton
                       variant={"text"}
@@ -505,9 +537,8 @@ const Staking = ({ setNotification }) => {
                   {" "}
                   {!account ? (
                     "$0.000000"
-                  ) : accountlockinfo.balance !== undefined ? (
-                    `$${((accountlockinfo.balance * price) / Math.pow(10, 18))
-                      .toFixed(6)}`
+                  ) : claimable !== undefined ? (
+                    `$${((claimable * price) / Math.pow(10, 18)).toFixed(6)}`
                   ) : (
                     <Skeleton
                       variant={"text"}
@@ -543,6 +574,48 @@ const Staking = ({ setNotification }) => {
                 >
                   Compound
                 </Button> */}
+              </Box>
+            </RewardPanel>
+          </Panel>
+          <Panel my={"24px"}>
+            <RewardPanel>
+              <Box>
+                <Box fontWeight={"500"}>ERC20 Earned </Box>
+                <Box
+                  fontWeight={"bold"}
+                  fontSize={"32px"}
+                  color={"white"}
+                  lineHeight={"130%"}
+                >
+                  {!account ? (
+                    "0.000"
+                  ) : accountlockinfo.emission !== undefined ? (
+                    (accountlockinfo.emission / Math.pow(10, 18)).toFixed(6)
+                  ) : (
+                    <Skeleton
+                      variant={"text"}
+                      width={"100px"}
+                      style={{ transform: "unset" }}
+                    />
+                  )}
+                </Box>
+                <Box fontWeight={"600"} mt={"3px"}>
+                  {" "}
+                  {!account ? (
+                    "$0.000000"
+                  ) : accountlockinfo.balance !== undefined ? (
+                    `$${(
+                      (accountlockinfo.balance * price) /
+                      Math.pow(10, 18)
+                    ).toFixed(6)}`
+                  ) : (
+                    <Skeleton
+                      variant={"text"}
+                      width={"80px"}
+                      style={{ transform: "unset" }}
+                    />
+                  )}
+                </Box>
               </Box>
             </RewardPanel>
           </Panel>
