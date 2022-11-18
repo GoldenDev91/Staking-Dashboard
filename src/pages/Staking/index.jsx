@@ -63,7 +63,7 @@ const Staking = ({ setNotification }) => {
       365 /
       86400 /
       Math.pow(10, 18);
-    if (!isNaN(claim)) setClaimable(claim);
+    if (!isNaN(claim) && claim > 0) setClaimable(claim);
   };
   // setInterval(() => calcClaimable(), 5000);
 
@@ -248,6 +248,7 @@ const Staking = ({ setNotification }) => {
         };
         harvestTx = await LockContract.claim(tx);
       }
+      setClaimable(0);
       const claimed = await harvestTx.wait();
       // console.log('claimed :>> ', claimed);
       // if (claimed === 0) {
