@@ -65,7 +65,9 @@ const Staking = ({ setNotification }) => {
       Math.pow(10, 18);
     if (!isNaN(claim) && claim > 0) setClaimable(claim);
   };
-  // setInterval(() => calcClaimable(), 5000);
+  useEffect(() => {
+    setInterval(() => calcClaimable(), 200);
+  }, []);
 
   useEffect(() => calcClaimable(), [accountlockinfo]);
 
@@ -248,8 +250,7 @@ const Staking = ({ setNotification }) => {
         };
         harvestTx = await LockContract.claim(tx);
       }
-      setClaimable(0);
-      const claimed = await harvestTx.wait();
+      await harvestTx.wait();
       // console.log('claimed :>> ', claimed);
       // if (claimed === 0) {
       //   setNotification({
@@ -273,6 +274,8 @@ const Staking = ({ setNotification }) => {
       figureError(error, setNotification);
     }
     setPending(false);
+    setClaimable(0);
+    accountlockinfo.depositDate = Date.now() + 100000000;
   };
 
   // const onHarvestReflection = async (i) => {
@@ -486,7 +489,7 @@ const Staking = ({ setNotification }) => {
           >
             {!account ? (
               "0.000000"
-            ) : balance !== undefined ? (
+            ) : accountlockinfo.balance !== undefined ? (
               (balance / Math.pow(10, 18)).toFixed(6)
             ) : (
               <Skeleton
@@ -500,7 +503,7 @@ const Staking = ({ setNotification }) => {
             {" "}
             {!account ? (
               "$0.0000000"
-            ) : balance !== undefined ? (
+            ) : accountlockinfo.balance !== undefined ? (
               `$${((balance / Math.pow(10, 18)) * price).toFixed(6)}`
             ) : (
               <Skeleton
@@ -524,7 +527,7 @@ const Staking = ({ setNotification }) => {
                 >
                   {!account ? (
                     "0.000000"
-                  ) : claimable !== undefined ? (
+                  ) : accountlockinfo.depositDate !== undefined ? (
                     (claimable / Math.pow(10, 18)).toFixed(6)
                   ) : (
                     <Skeleton
@@ -538,7 +541,7 @@ const Staking = ({ setNotification }) => {
                   {" "}
                   {!account ? (
                     "$0.000000"
-                  ) : claimable !== undefined ? (
+                  ) : accountlockinfo.depositDate !== undefined ? (
                     `$${((claimable * price) / Math.pow(10, 18)).toFixed(6)}`
                   ) : (
                     <Skeleton

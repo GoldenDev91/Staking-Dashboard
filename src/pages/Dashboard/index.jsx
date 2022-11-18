@@ -316,7 +316,7 @@ const Dashboard = ({ setNotification }) => {
           <Panel my={"24px"}>
             <RewardPanel>
               <Box>
-                <Box fontWeight={"500"}>Total Staked Tokens </Box>
+                <Box fontWeight={"500"}>Total Tokens Staked </Box>
                 <Box
                   fontWeight={"bold"}
                   fontSize={"32px"}
@@ -439,7 +439,7 @@ const Dashboard = ({ setNotification }) => {
             >
               {!account ? (
                 "0.000000"
-              ) : lockinfo.interest / Math.pow(10, 16) !== undefined ? (
+              ) : lockinfo.totalStaked !== undefined ? (
                 (lockinfo.interest / Math.pow(10, 16)).toFixed(2) + "%"
               ) : (
                 <Skeleton
