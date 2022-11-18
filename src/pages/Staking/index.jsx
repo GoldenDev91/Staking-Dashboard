@@ -57,19 +57,25 @@ const Staking = ({ setNotification }) => {
   const [claimable, setClaimable] = useState(0);
 
   const calcClaimable = () => {
+    if (accountlockinfo.depositDate === undefined) return;
     const timePassed = Date.now() / 1000 - accountlockinfo.depositDate;
     const claim =
       (accountlockinfo.balance * lockinfo.interest * timePassed) /
       365 /
       86400 /
       Math.pow(10, 18);
+    console.log("accountlockinfo.depositDate:>>", accountlockinfo.depositDate);
+    console.log("timePassed :>> ", timePassed);
+    console.log("accountlockinfo.balance :>> ", accountlockinfo.balance);
+    console.log("lockinfo.interest :>> ", lockinfo.interest);
+    console.log(claim);
     if (!isNaN(claim) && claim > 0) setClaimable(claim);
   };
   useEffect(() => {
     setInterval(() => calcClaimable(), 200);
   }, []);
 
-  useEffect(() => calcClaimable(), [accountlockinfo]);
+  useEffect(() => calcClaimable(), [accountlockinfo.depositDate]);
 
   function numberWithCommas(x) {
     if (!x) return;
@@ -275,7 +281,7 @@ const Staking = ({ setNotification }) => {
     }
     setPending(false);
     setClaimable(0);
-    accountlockinfo.depositDate = Date.now() + 100000000;
+    accountlockinfo.depositDate = Date.now() + 30000;
   };
 
   // const onHarvestReflection = async (i) => {
