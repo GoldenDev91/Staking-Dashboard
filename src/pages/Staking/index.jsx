@@ -64,11 +64,11 @@ const Staking = ({ setNotification }) => {
       365 /
       86400 /
       Math.pow(10, 18);
-    console.log("accountlockinfo.depositDate:>>", accountlockinfo.depositDate);
-    console.log("timePassed :>> ", timePassed);
-    console.log("accountlockinfo.balance :>> ", accountlockinfo.balance);
-    console.log("lockinfo.interest :>> ", lockinfo.interest);
-    console.log(claim);
+    // console.log("accountlockinfo.depositDate:>>", accountlockinfo.depositDate);
+    // console.log("timePassed :>> ", timePassed);
+    // console.log("accountlockinfo.balance :>> ", accountlockinfo.balance);
+    // console.log("lockinfo.interest :>> ", lockinfo.interest);
+    // console.log(claim);
     if (!isNaN(claim) && claim > 0) setClaimable(claim);
   };
   useEffect(() => {
