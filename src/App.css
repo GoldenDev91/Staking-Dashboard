@@ -1,0 +1,158 @@
+* {
+  outline: none;
+  box-sizing: border-box;
+  -ms-overflow-style: none !important;
+  /* IE and Edge */
+}
+
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+  display: none !important;
+}
+
+::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+  height: 30px;
+  background-color: #18243b;
+}
+
+html,
+body,
+#root {
+  font-family: "Poppins";
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #090A1A;
+  min-height: 100vh;
+}
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.app {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-flow: column;
+  flex-direction: column;
+  z-index: 1;
+  background-size: cover;
+  font-family: "Satoshi";
+  transition: all ease 0.33ms;
+}
+
+.MuiDrawer-paperAnchorDockedLeft {
+  border-right: 0 !important;
+}
+
+.ohm-pairs {
+  display: flex;
+  align-items: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield !important;
+}
+
+a:hover svg {
+  color: inherit;
+}
+
+.MuiLink-root.active {
+  color: #ffe300 !important;
+  text-decoration: underline;
+}
+
+.ReactModal__Overlay {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.ReactModal__Content {
+  border: none !important;
+  background: rgba(41, 41, 41, 0.8) !important;
+  overflow: unset !important;
+}
+
+.ReactModalPortal {
+  position: relative;
+  z-index: 10;
+}
+
+.MuiSkeleton-root {
+  background-color: rgba(150, 150, 150, 0.3) !important;
+}
+
+.highcharts-label > text {
+  fill: #1fc7d4 !important;
+}
+
+#WEB3_CONNECT_MODAL_ID {
+  position: relative;
+  z-index: 1000;
+}
+
+.MuiDialog-container > div {
+  background-color: transparent !important;
+  max-width: unset;
+  margin: 0px !important;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15) !important;
+}
+
+.MuiDialog-container {
+  backdrop-filter: blur(24px);
+}
+
+.MuiDialog-paper {
+  overflow: hidden !important;
+}
+
+.react-multi-carousel-list {
+  position: unset !important;
+}
+
+.react-multi-carousel-item {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.MuiSlider-rail {
+  background-color: white !important;
+  opacity: 1 !important;
+}
+
+.MuiSlider-thumb {
+  background: #76ed10 !important;
+  width: 24px !important;
+  height: 24px !important;
+}
+
+@media screen and (max-width: 450px) {
+  .MuiSlider-thumb {
+    width: 22px !important;
+    height: 22px !important;
+  }
+}
+
+.MuiSlider-track {
+  border: 1px solid #3e8940 !important;
+}
+
+.MuiSvgIcon-root {
+  font-size: 32px !important;
+}
+
+.MuiCheckbox-root {
+  color: #f50057 !important;
+}
