@@ -72,7 +72,7 @@ const Staking = ({ setNotification }) => {
     if (!isNaN(claim) && claim > 0) setClaimable(claim);
   };
   useEffect(() => {
-    setInterval(() => calcClaimable(), 200);
+    //setInterval(() => calcClaimable(), 200);
   }, []);
 
   useEffect(() => calcClaimable(), [accountlockinfo.depositDate]);
