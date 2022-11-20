@@ -42,7 +42,7 @@ function ConnectMenu({ setNotification }) {
   return (
     <div>
       <Button
-        type={"connect"}
+        type={"primary"}
         width={xs ? "150px" : "222px"}
         height={xs ? "45px" : "54px"}
         fontSize={xs ? "13px" : "16px"}

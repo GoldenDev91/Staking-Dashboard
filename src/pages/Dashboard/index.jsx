@@ -314,7 +314,7 @@ const Dashboard = ({ setNotification }) => {
           </Box>
           <Box mt={"16px"} color={"#ece0e2"}>
             <Box display={"flex"} alignItems={"center"}>
-              <Box>Smart Contract:  0xf3F0...C0fC</Box>
+              <Box>Smart Contract: 0xf3F0...C0fC</Box>
               <Box ml="10px">
                 <a href="https://testnet.bscscan.com/address/0xf3F0cB29eCDAE58C9975f537400ed08fD0e0C0fC">
                   <FaExternalLinkAlt></FaExternalLinkAlt>
