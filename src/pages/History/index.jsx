@@ -115,7 +115,7 @@ const GTableHeadItem = styled(Box)`
   font-family: "Poppins";
   font-style: normal;
   font-weight: 600;
-  font-size: 14.4525px;
+  font-size: 20px;
   line-height: 22px;
   letter-spacing: 0.103232px;
   color: #92929d;
@@ -145,7 +145,7 @@ const GTableRowItem = styled(Box)`
   font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
-  font-size: 16.5172px;
+  font-size: 20px;
   line-height: 162%;
   letter-spacing: 0.103232px;
   color: #b5b5be;
