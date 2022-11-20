@@ -32,7 +32,7 @@ const History = () => {
               <GTableHeadItem flex={"2 0 0"}>#</GTableHeadItem>
               <GTableHeadItem flex={"3 0 0"}>Date</GTableHeadItem>
               <GTableHeadItem flex={"2 0 0"}>Amount</GTableHeadItem>
-              <GTableHeadItem flex={"2 0 0"}>Type</GTableHeadItem>
+              <GTableHeadItem flex={"2 0 0"}>Action</GTableHeadItem>
             </GTableHead>
           ) : (
             ""
