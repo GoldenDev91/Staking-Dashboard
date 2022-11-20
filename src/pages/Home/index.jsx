@@ -669,7 +669,7 @@ const Home = ({ setNotification }) => {
                   </GTableRowItem>
                 </GTableRow>
               ))
-            ) 
+            )
           ) : (
             <Box m={"30px"} fontSize={"20px"} textAlign={"center"}>
               There is no records to show.
