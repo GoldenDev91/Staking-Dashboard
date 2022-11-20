@@ -741,6 +741,27 @@ const Panel = styled(Box)`
     padding: 2rem 1.5rem;
   }
   margin: 20px;
+  &:hover {
+    transform: scale(1.05);
+    /* transform: translate(0px, -20px); */
+    /* animation-play-state: paused; */
+  }
+  transition: all 0.2s ease-out;
+  /* animation: pulse 3s infinite;
+
+  @keyframes pulse {
+    0% {
+      transform: translate(0px, 0px);
+    }
+
+    50% {
+      transform: translate(0px, -10px);
+    }
+
+    100% {
+      transform: translate(0px, 0px);
+    }
+  } */
 `;
 
 const RowLayout = styled(Box)`
@@ -784,7 +805,7 @@ const Mainpage = styled(Box)`
 const StyledContainer = styled(Box)`
   min-height: 100vh;
   width: 100vw;
-  text-shadow:#741e47 0 0 6px;
+  text-shadow: #741e47 0 0 6px;
 `;
 
 const Background = styled(Box)`
@@ -792,7 +813,7 @@ const Background = styled(Box)`
   min-height: 100vh;
   background-image: url("/background.webp");
   /* filter: blur(4px) grayscale(0); */
-  filter: brightness(0.9);
+  /* filter: brightness(0.9); */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
