@@ -22,6 +22,7 @@ import useTokenInfo from "../../hooks/useTokenInfo";
 import { getLockContract, getTokenContract } from "../../utils/contracts";
 import { figureError } from "../../utils/functions";
 import { numberWithCommas } from "../../utils/functions";
+import { FaExternalLinkAlt } from "react-icons/fa";
 
 // const lockcompound = [
 //   [38.65 / 32.69, 38.53 / 32.69, 38.39 / 32.69, 38.07 / 32.69],
@@ -310,6 +311,16 @@ const Dashboard = ({ setNotification }) => {
           </Box>
           <Box mt={"16px"} fontWeight={"bold"} color={"#ece0e2"}>
             *No claim restriction.
+          </Box>
+          <Box mt={"16px"} color={"#ece0e2"}>
+            <Box display={"flex"} alignItems={"center"}>
+              <Box>Smart Contract:  0xf3F0...C0fC</Box>
+              <Box ml="10px">
+                <a href="https://testnet.bscscan.com/address/0xf3F0cB29eCDAE58C9975f537400ed08fD0e0C0fC">
+                  <FaExternalLinkAlt></FaExternalLinkAlt>
+                </a>
+              </Box>
+            </Box>
           </Box>
         </Panel>
         <Box maxWidth={"450px"} width={"100%"}>
