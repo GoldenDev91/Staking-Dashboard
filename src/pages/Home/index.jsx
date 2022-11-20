@@ -731,8 +731,9 @@ import { useEffect } from 'react';
 const Panel = styled(Box)`
   padding: 3rem;
   border-radius: 2rem;
-  background: #16182DDD;
+  background: #16182ddd;
   /* background: #11364CD0; */
+  background: #56182dcc;
   box-shadow: 0 -4px 0 0 #eee, 0 4px 0 0 #111;
   /* box-shadow:0 0 10px 4px #0000FF , 0 0 20px 30px #008000, 30px 0 20px 30px #FF1493, -30px -30px 20px 30px #FF4500; */
   width: 100%;
@@ -783,13 +784,15 @@ const Mainpage = styled(Box)`
 const StyledContainer = styled(Box)`
   min-height: 100vh;
   width: 100vw;
+  text-shadow:#741e47 0 0 6px;
 `;
 
 const Background = styled(Box)`
   width: 100vw;
   min-height: 100vh;
   background-image: url("/background.webp");
-  filter: blur(4px) grayscale(0.5);
+  /* filter: blur(4px) grayscale(0); */
+  filter: brightness(0.9);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
