@@ -1,4 +1,4 @@
-import { Box, useMediaQuery, Checkbox } from "@mui/material";
+import { Box, useMediaQuery, Checkbox, Skeleton } from "@mui/material";
 
 import styled from "styled-components";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
@@ -25,7 +25,7 @@ const History = () => {
         {/* <Label>
           History
         </Label> */}
-        <ColumnLayout width="100%" display={account ? "unset" : "none"}>
+        <ColumnLayout width="100%">
           {!sm ? (
             <GTableHead>
               {/* <StyledCheckbox flex={"1 0 0"}></StyledCheckbox> */}
@@ -37,20 +37,21 @@ const History = () => {
           ) : (
             ""
           )}
-          {account && Array.isArray(accounthistory)
+          {accounthistory &&
+          Array.isArray(accounthistory) &&
+          accounthistory.length
             ? accounthistory.map((history, idx) => (
                 <GTableRow>
                   {/* <StyledCheckbox flex={"1 0 0"}></StyledCheckbox> */}
                   <GTableRowItem flex={"1 0 0"} color={"#E2E2EA"}>
-                    {sm ? "#" + idx : idx}
+                    {sm ? "#" + (idx + 1) : idx + 1}
                   </GTableRowItem>
                   <GTableRowItem flex={"3 0 0"} whiteSpace={"nowrap"}>
                     {new Date(history.timestamp * 1000).toLocaleString()}
                   </GTableRowItem>
                   <GTableRowItem
                     flex={"2 0 0"}
-                    dotAfter={history.isDeposit ? "blue" : "red"}
-                    justifySelf={"flex-start"}
+                    dotafter={history.isDeposit ? "blue" : "red"}
                   >
                     {(history.amount / Math.pow(10, 18)).toFixed(6)}
                   </GTableRowItem>
@@ -68,7 +69,23 @@ const History = () => {
               </GTableRowItem> */}
                 </GTableRow>
               ))
-            : ""}
+            : [1, 2, 3, 4, 5].map((history, idx) => (
+                <GTableRow>
+                  {/* <StyledCheckbox flex={"1 0 0"}></StyledCheckbox> */}
+                  <GTableRowItem flex={"1 0 0"} color={"#E2E2EA"}>
+                    <Skeleton />
+                  </GTableRowItem>
+                  <GTableRowItem flex={"3 0 0"} whiteSpace={"nowrap"}>
+                    <Skeleton />
+                  </GTableRowItem>
+                  <GTableRowItem flex={"2 0 0"}>
+                    <Skeleton />
+                  </GTableRowItem>
+                  <GTableRowItem flex={"2 0 0"}>
+                    <Skeleton />
+                  </GTableRowItem>
+                </GTableRow>
+              ))}
         </ColumnLayout>
       </ColumnLayout>
     </StyledContainer>
@@ -84,7 +101,7 @@ const GTableHead = styled(Box)`
   display: flex;
   flex-direction: row;
   align-items: center;
-  background: rgba(21, 21, 33, 0.74);
+  background: rgba(41, 41, 53, 0.74);
   backdrop-filter: blur(3.5px);
   border-radius: 10px;
   width: 100%;
@@ -108,7 +125,8 @@ const GTableRow = styled(Box)`
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  background: rgba(11, 11, 16, 0.72);
+  //background: rgba(11, 11, 16, 0.72);
+  background: rgba(21, 21, 33, 0.74);
   backdrop-filter: blur(3.5px);
   border-radius: 10px;
   padding: 16.5px 19px;
@@ -132,9 +150,9 @@ const GTableRowItem = styled(Box)`
   margin: 0 20px 0 0;
   /* padding: 0 20px; */
   ${(props) => {
-    if (props.dotAfter === "red")
+    if (props.dotafter === "red")
       return "::after { content: ''; background-color: #ff5050; width: 10px; height: 10px; border: 0; border-radius: 10px; display: inline-block; margin-left: 10px; }";
-    if (props.dotAfter === "blue")
+    if (props.dotafter === "blue")
       return "::after { content: ''; background-color: #50b5ff; width: 10px; height: 10px; border: 0; border-radius: 10px; display: inline-block; margin-left: 10px; }";
   }}
 `;
@@ -185,19 +203,21 @@ const ColumnLayout = styled(Box)`
 `;
 
 const StyledContainer = styled(Box)`
+  font-family: "Inter";
+  user-select: none;
   > div {
-    max-width: 800px;
+    max-width: 1000px;
     padding: 0 40px;
     margin: 30px auto;
     > div:nth-child(1) {
-      cursor: pointer;
+      /* cursor: pointer; */
     }
   }
   position: relative;
   z-index: 10;
-  padding: 80px 0 300px 0;
+  padding: 120px 0 300px 0;
   @media screen and (max-width: 800px) {
-    padding: 80px 0;
+    padding: 120px 0;
     > div {
       padding: 0 20px;
     }

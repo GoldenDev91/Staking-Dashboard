@@ -850,6 +850,8 @@ const Panel = styled(Box)`
   padding: 3rem;
   border-radius: 2rem;
   background: #16182d;
+  //background: #1f2228;
+  //#0047ff #57048a;
   width: 100%;
   @media screen and (max-width: 615px) {
     padding: 2rem 1.5rem;

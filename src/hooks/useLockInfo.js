@@ -13,7 +13,7 @@ const defaultVal = {
   lockinfo: {},
   lockallow: false,
   accountlockinfo: {},
-  accounthistory: {},
+  accounthistory: [],
   fetchLockData: () => {},
   fetchAccountLockData: () => {},
   fetchAccountHistory: () => {},
@@ -114,6 +114,7 @@ export function LockInfoProvider({ children }) {
   }
   async function fetchAccountHistory() {
     try {
+      if (accountlockinfo.maxId === 0) return;
       let calls = [];
       for (let i = 0; i < accountlockinfo.maxId; i++) {
         calls[i] = {
