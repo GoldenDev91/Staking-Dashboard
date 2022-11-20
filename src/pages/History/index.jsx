@@ -109,6 +109,7 @@ const GTableHead = styled(Box)`
   padding: 17.5px 19px;
   position: relative;
   z-index: 3;
+  margin-bottom: 5px;
 `;
 const GTableHeadItem = styled(Box)`
   font-family: "Poppins";
@@ -125,8 +126,9 @@ const GTableRow = styled(Box)`
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  //background: rgba(11, 11, 16, 0.72);
-  background: rgba(21, 21, 33, 0.74);
+  /* background: rgba(11, 11, 16, 0.72); */
+  /* background: rgba(21, 21, 33, 0.74); */
+  background: #16182d;
   backdrop-filter: blur(3.5px);
   border-radius: 10px;
   padding: 16.5px 19px;
