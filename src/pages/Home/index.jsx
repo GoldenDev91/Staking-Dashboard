@@ -672,7 +672,7 @@ const Home = ({ setNotification }) => {
             )
           ) : (
             <Box m={"30px"} fontSize={"20px"} textAlign={"center"}>
-              There is no records to show.
+              There is no record to show.
               <br /> Please connect wallet.
             </Box>
           )}
