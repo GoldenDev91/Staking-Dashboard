@@ -25,15 +25,18 @@ import { numberWithCommas } from "../../utils/functions";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import ConnectMenu from "../../components/TopBar/ConnectMenu";
 import { useEffect } from "react";
+import { fontSize } from "@mui/system";
 
 const Home = ({ setNotification }) => {
   const {
     lockinfo,
     lockallow,
     accountlockinfo,
+    accounthistory,
     fetchAccountLockData,
     fetchLockData,
     fetchAllowance,
+    fetchAccountHistory,
   } = useLockInfo();
 
   const { price, balance, fetchAccountTokenInfo } = useTokenInfo();
@@ -594,6 +597,87 @@ const Home = ({ setNotification }) => {
           </ColumnLayout>
         </RowLayout>
       </Mainpage>
+
+      <ColumnLayout
+        zIndex={3}
+        position={"relative"}
+        alignSelf={"center"}
+        mt={"50px"}
+      >
+        <Label>History</Label>
+        <ColumnLayout maxWidth={mw1150 ? "650px" : "1130px"} width={"98%"}>
+          {!sm ? (
+            <GTableHead>
+              {/* <StyledCheckbox flex={"1 0 0"}></StyledCheckbox> */}
+              <GTableHeadItem flex={"2 0 0"}>#</GTableHeadItem>
+              <GTableHeadItem flex={"3 0 0"}>Date</GTableHeadItem>
+              <GTableHeadItem flex={"2 0 0"}>Amount</GTableHeadItem>
+              <GTableHeadItem flex={"2 0 0"}>Action</GTableHeadItem>
+            </GTableHead>
+          ) : (
+            ""
+          )}
+          {account ? (
+            accounthistory &&
+            Array.isArray(accounthistory) &&
+            accounthistory.length ? (
+              accounthistory.map((history, idx) => (
+                <GTableRow key={"idx"}>
+                  {/* <StyledCheckbox flex={"1 0 0"}></StyledCheckbox> */}
+                  <GTableRowItem flex={"1 0 0"} color={"#E2E2EA"}>
+                    {sm ? "#" + (idx + 1) : idx + 1}
+                  </GTableRowItem>
+                  <GTableRowItem flex={"3 0 0"} whiteSpace={"nowrap"}>
+                    {new Date(history.timestamp * 1000).toLocaleString()}
+                  </GTableRowItem>
+                  <GTableRowItem
+                    flex={"2 0 0"}
+                    dotafter={history.isDeposit ? "blue" : "red"}
+                    whiteSpace={"nowrap"}
+                  >
+                    {(history.amount / Math.pow(10, 18)).toFixed(6)}
+                  </GTableRowItem>
+                  <GTableRowItem flex={"2 0 0"}>
+                    {history.isDeposit ? "Deposit" : "Withdraw"}
+                  </GTableRowItem>
+                  {/* <GTableRowItem flex={"2 0 0"} color={"#89F8FF"}>
+                Success
+              </GTableRowItem>
+              <GTableRowItem flex={"2 0 0"}>0x234...c03</GTableRowItem>
+              <GTableRowItem flex={"0.5 0 0"} alignSelf={"flex-end"}>
+                <RowLayout justifyContent={"space-between"}>
+                  <Box />
+                </RowLayout>
+              </GTableRowItem> */}
+                </GTableRow>
+              ))
+            ) : (
+              [1, 2, 3, 4, 5].map((history, idx) => (
+                <GTableRow>
+                  {/* <StyledCheckbox flex={"1 0 0"}></StyledCheckbox> */}
+                  <GTableRowItem flex={"1 0 0"} color={"#E2E2EA"}>
+                    <Skeleton />
+                  </GTableRowItem>
+                  <GTableRowItem flex={"3 0 0"} whiteSpace={"nowrap"}>
+                    <Skeleton />
+                  </GTableRowItem>
+                  <GTableRowItem flex={"2 0 0"}>
+                    <Skeleton />
+                  </GTableRowItem>
+                  <GTableRowItem flex={"2 0 0"}>
+                    <Skeleton />
+                  </GTableRowItem>
+                </GTableRow>
+              ))
+            )
+          ) : (
+            <Box m={"30px"} fontSize={"20px"} textAlign={"center"}>
+              There is no records to show.
+              <br /> Please connect wallet.
+            </Box>
+          )}
+        </ColumnLayout>
+      </ColumnLayout>
     </StyledContainer>
   );
 };
@@ -611,6 +695,82 @@ const HomeTopBar = styled(Box)`
   }
   @media screen and (max-width: 450px) {
     padding: 36px 10px;
+  }
+`;
+
+const GTableHead = styled(Box)`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: #741e47;
+  backdrop-filter: blur(3.5px);
+  border-radius: 10px;
+  width: 100%;
+  justify-content: space-between;
+  padding: 17.5px 19px;
+  position: relative;
+  z-index: 3;
+  margin-bottom: 5px;
+`;
+const GTableHeadItem = styled(Box)`
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: 0.103232px;
+  color: #92929d;
+`;
+
+const GTableRow = styled(Box)`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  /* background: rgba(11, 11, 16, 0.72); */
+  /* background: rgba(21, 21, 33, 0.74); */
+  //?background: #16182d;
+  background: #ffffff0d;
+  backdrop-filter: blur(3.5px);
+  border-radius: 10px;
+  padding: 16.5px 19px;
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  justify-content: space-between;
+  margin: 5.5px 0;
+  > div:last-child {
+    margin: 0 !important;
+  }
+`;
+const GTableRowItem = styled(Box)`
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 162%;
+  letter-spacing: 0.103232px;
+  color: #b5b5be;
+  margin: 0 20px 0 0;
+  /* padding: 0 20px; */
+  ${(props) => {
+    if (props.dotafter === "red")
+      return "::after { content: ''; background-color: #ff5050; width: 10px; height: 10px; border: 0; border-radius: 10px; display: inline-block; margin-left: 10px; }";
+    if (props.dotafter === "blue")
+      return "::after { content: ''; background-color: #50b5ff; width: 10px; height: 10px; border: 0; border-radius: 10px; display: inline-block; margin-left: 10px; }";
+  }}
+`;
+
+const Label = styled(Box)`
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+
+  color: #e5e5e5;
+  margin: 0 0 37px 0;
+  @media screen and (max-width: 700px) {
+    margin-bottom: 20px;
   }
 `;
 
@@ -709,7 +869,8 @@ const ButtonGroup = styled(Box)`
     font-weight: 500;
     background-color: #2c2f4c;
     color: white !important;
-    border: 0;
+    border: 0;import History from './../History/index';
+
 
     border-radius: 10px;
     :hover:not([disabled]) {
