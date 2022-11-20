@@ -6,8 +6,9 @@ import { Box } from "@mui/material";
 import styled from "styled-components";
 import Dashboard from "./pages/Dashboard";
 import Staking from "./pages/Staking";
-import TopBar from "./components/TopBar/TopBar";
+import History from "./pages/History";
 import FAQ from "./pages/FAQ";
+import TopBar from "./components/TopBar/TopBar";
 
 import "./App.css";
 import Notification from "./components/Notification";
@@ -54,6 +55,11 @@ function App() {
             exact
             path="/staking"
             element={<Staking setNotification={setNotification} />}
+          />
+          <Route
+            exact
+            path="/history"
+            element={<History setNotification={setNotification} />}
           />
           <Route
             exact
