@@ -26,6 +26,7 @@ export default function useLockInfo() {
   return React.useContext(LockInfoContext);
 }
 let timerid = null,
+  historyTimer = null,
   lockid = null;
 export function LockInfoProvider({ children }) {
   const account = useAddress();
@@ -182,8 +183,8 @@ export function LockInfoProvider({ children }) {
     if (chainID !== WORKING_NETWORK_ID) return;
     if (!account) return;
     fetchAccountHistory();
-    if (timerid) clearInterval(timerid);
-    timerid = setInterval(() => {
+    if (historyTimer) clearInterval(historyTimer);
+    historyTimer = setInterval(() => {
       fetchAccountHistory();
     }, 20000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
