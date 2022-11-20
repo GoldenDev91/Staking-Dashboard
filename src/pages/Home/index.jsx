@@ -203,6 +203,9 @@ const Home = ({ setNotification }) => {
 
   const sm = useMediaQuery("(max-width : 500px)");
   const xs = useMediaQuery("(max-width : 450px)");
+  const mw950 = useMediaQuery("(max-width : 950px)");
+  const mw650 = useMediaQuery("(max-width : 650px)");
+  const mw1150 = useMediaQuery("(max-width : 1150px)");
 
   return (
     <StyledContainer>
@@ -210,7 +213,13 @@ const Home = ({ setNotification }) => {
       <HomeTopBar position={"relative"}>
         <Box display={"flex"} alignItems={"center"}>
           <LogoSVG />
-          <Box ml={"20px"} fontSize={"36px"} fontWeight="800">
+          <Box
+            ml={mw950 ? "0px" : mw1150 ? "10px" : "20px"}
+            fontSize={mw650 ? "20px" : mw950 ? "28px" : "36px"}
+            fontWeight="800"
+            textAlign={"center"}
+            width={mw950 ? "min-content" : "fit-content"}
+          >
             TRUMP & WORLDCUP
           </Box>
         </Box>
@@ -224,7 +233,7 @@ const Home = ({ setNotification }) => {
       >
         <RowLayout width={"100%"} gap={"20px"}>
           <Panel>
-            <Box fontSize={"12px"} color={"#888"}>
+            <Box fontSize={"12px"} color={"#CCC"}>
               Holder Amount staked
             </Box>
             <RowLayout
@@ -249,7 +258,7 @@ const Home = ({ setNotification }) => {
                 />
               )}
             </Box>
-            <Box fontSize={"12px"} color={"#888"}>
+            <Box fontSize={"12px"} color={"#CCC"}>
               {!account ? (
                 "USDT Value: $0.00"
               ) : accountlockinfo.balance !== undefined ? (
@@ -267,7 +276,7 @@ const Home = ({ setNotification }) => {
             </Box>
           </Panel>
           <Panel>
-            <Box fontSize={"12px"} color={"#888"}>
+            <Box fontSize={"12px"} color={"#CCC"}>
               Holder Amount Earned
             </Box>
             <RowLayout
@@ -292,7 +301,7 @@ const Home = ({ setNotification }) => {
                 />
               )}
             </Box>
-            <Box fontSize={"12px"} color={"#888"}>
+            <Box fontSize={"12px"} color={"#CCC"}>
               {!account ? (
                 "USDT Value: $0.00"
               ) : accountlockinfo.emission !== undefined ? (
@@ -310,7 +319,7 @@ const Home = ({ setNotification }) => {
             </Box>
           </Panel>
           <Panel>
-            <Box fontSize={"12px"} color={"#888"}>
+            <Box fontSize={"12px"} color={"#CCC"}>
               Claimable
             </Box>
             <RowLayout
@@ -335,7 +344,7 @@ const Home = ({ setNotification }) => {
                 />
               )}
             </Box>
-            <Box fontSize={"12px"} color={"#888"}>
+            <Box fontSize={"12px"} color={"#CCC"}>
               {!account ? (
                 "USDT Value: $0.0000000000"
               ) : accountlockinfo.depositDate !== undefined ? (
@@ -356,7 +365,7 @@ const Home = ({ setNotification }) => {
         <RowLayout alignItems={"unset"}>
           <Panel flex={"1 0 0"}>
             <RowLayout justifyContent={"space-between"}>
-              <Box fontSize={"20px"} fontWeight={"800"}>
+              <Box fontSize={"30px"} fontWeight={"800"}>
                 Stake
               </Box>
               <RowLayout>
@@ -376,6 +385,12 @@ const Home = ({ setNotification }) => {
                 </Box>
               </RowLayout>
             </RowLayout>
+            <Box
+              width={"100%"}
+              backgroundColor={"white"}
+              height={"4px"}
+              my={"15px"}
+            ></Box>
             <Box my={"24px"}>
               <InputPanel>
                 <InputField>
@@ -493,7 +508,7 @@ const Home = ({ setNotification }) => {
                 justifyContent={"flex-start"}
               >
                 <LogoSVG width={"30px"} height={"30px"} mr={"10px"}></LogoSVG>
-                {!account ? (
+                {!lockinfo ? (
                   "0.0000000000"
                 ) : lockinfo.totalStaked !== undefined ? (
                   (lockinfo.totalStaked / Math.pow(10, 18)).toFixed(6)
@@ -505,8 +520,8 @@ const Home = ({ setNotification }) => {
                   />
                 )}
               </RowLayout>
-              <Box fontSize={"12px"} color={"#888"}>
-                {!account ? (
+              <Box fontSize={"12px"} color={"#CCC"}>
+                {!lockinfo ? (
                   "USDT Value: $0.0000000000"
                 ) : lockinfo.totalStaked !== undefined ? (
                   `USDT Value: $${(
@@ -528,7 +543,7 @@ const Home = ({ setNotification }) => {
                 <Box fontSize={"15px"}>
                   <a href="https://testnet.bscscan.com/address/0x959719Be58e4B18d4C650C0D265cE08846501C91">
                     <RowLayout>
-                      View $TWC on Etherscan
+                      View on Etherscan
                       <FaExternalLinkAlt></FaExternalLinkAlt>
                     </RowLayout>
                   </a>
@@ -539,7 +554,7 @@ const Home = ({ setNotification }) => {
                 <Box fontSize={"15px"}>
                   <a href="https://testnet.bscscan.com/address/0xf3F0cB29eCDAE58C9975f537400ed08fD0e0C0fC">
                     <RowLayout>
-                      View contract on Etherscan
+                      View on Etherscan
                       <FaExternalLinkAlt></FaExternalLinkAlt>
                     </RowLayout>
                   </a>
@@ -547,7 +562,7 @@ const Home = ({ setNotification }) => {
               </RowLayout>
               <Box fontSize={"20px"} fontWeight={"800"}>
                 <RowLayout justifyContent={"space-between"}>
-                  <Box>APR</Box>
+                  <Box>$TWC APR</Box>
                   <Box
                     fontSize={"18px"}
                     color={"#00FF31"}
@@ -559,14 +574,14 @@ const Home = ({ setNotification }) => {
                     }
                     padding={"4px"}
                   >
-                    {!account ? (
+                    {!lockinfo ? (
                       "0.00%"
                     ) : lockinfo.totalStaked !== undefined ? (
                       (lockinfo.interest / Math.pow(10, 16)).toFixed(2) + "%"
                     ) : (
                       <Skeleton
                         variant={"text"}
-                        width={"100px"}
+                        width={"70px"}
                         style={{ transform: "unset" }}
                       />
                     )}
@@ -586,6 +601,15 @@ const HomeTopBar = styled(Box)`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  @media screen and (max-width: 1150px) {
+    padding: 36px 60px;
+  }
+  @media screen and (max-width: 950px) {
+    padding: 36px 20px;
+  }
+  @media screen and (max-width: 450px) {
+    padding: 36px 10px;
+  }
 `;
 
 const LogoSVG = styled(Box)`
@@ -707,8 +731,8 @@ import { useEffect } from 'react';
 const Panel = styled(Box)`
   padding: 3rem;
   border-radius: 2rem;
-  //background: #16182d;
-  background: #202020ee;
+  background: #16182DDD;
+  /* background: #11364CD0; */
   box-shadow: 0 -4px 0 0 #eee, 0 4px 0 0 #111;
   /* box-shadow:0 0 10px 4px #0000FF , 0 0 20px 30px #008000, 30px 0 20px 30px #FF1493, -30px -30px 20px 30px #FF4500; */
   width: 100%;
@@ -765,7 +789,7 @@ const Background = styled(Box)`
   width: 100vw;
   min-height: 100vh;
   background-image: url("/background.webp");
-  filter: blur(4px) grayscale(1);
+  filter: blur(4px) grayscale(0.5);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
