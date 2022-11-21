@@ -13,8 +13,10 @@ const defaultVal = {
   lockinfo: {},
   lockallow: false,
   accountlockinfo: {},
+  accounthistory: [],
   fetchLockData: () => {},
   fetchAccountLockData: () => {},
+  fetchAccountHistory: () => {},
   fetchAllowance: () => {},
 };
 
@@ -24,11 +26,13 @@ export default function useLockInfo() {
   return React.useContext(LockInfoContext);
 }
 let timerid = null,
+  historyTimer = null,
   lockid = null;
 export function LockInfoProvider({ children }) {
   const account = useAddress();
   const [lockinfo, setLockInfo] = useState({});
   const [accountlockinfo, setAccountLockInfo] = useState({});
+  const [accounthistory, setAccountHistory] = useState({});
   const [lockallow, setLockAllow] = useState(false);
 
   const { chainID } = useWeb3Context();
@@ -109,6 +113,33 @@ export function LockInfoProvider({ children }) {
       console.log(error);
     }
   }
+  async function fetchAccountHistory() {
+    try {
+      if (accountlockinfo.maxId === 0) return;
+      let calls = [];
+      for (let i = 0; i < accountlockinfo.maxId; i++) {
+        calls[i] = {
+          address: SSL_LOCK[chainID],
+          name: "stakeInfos",
+          params: [account, i],
+        };
+      }
+
+      const result = await multicall(LockABI, calls, chainID);
+      const tmp = [];
+      for (let i = 0; i < accountlockinfo.maxId; i++) {
+        tmp[i] = {
+          amount: result[i][0],
+          timestamp: result[i][1],
+          isDeposit: result[i][2],
+        };
+      }
+      console.log("accounthistory", tmp);
+      setAccountHistory(tmp);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   async function fetchAllowance() {
     try {
@@ -120,7 +151,6 @@ export function LockInfoProvider({ children }) {
         },
       ];
       const result = await multicall(TokenABI, calls, chainID);
-      console.log("result :>> ", result);
       setLockAllow(result[0][0] > ethers.utils.parseUnits("10000", 4));
     } catch (error) {
       console.log(error);
@@ -149,14 +179,27 @@ export function LockInfoProvider({ children }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [account, chainID]);
 
+  useEffect(() => {
+    if (chainID !== WORKING_NETWORK_ID) return;
+    if (!account) return;
+    fetchAccountHistory();
+    if (historyTimer) clearInterval(historyTimer);
+    historyTimer = setInterval(() => {
+      fetchAccountHistory();
+    }, 20000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [account, accountlockinfo.maxId]);
+
   return (
     <LockInfoContext.Provider
       value={{
         lockinfo: lockinfo,
         lockallow,
         accountlockinfo: accountlockinfo,
+        accounthistory: accounthistory,
         fetchLockData,
         fetchAccountLockData,
+        fetchAccountHistory,
         fetchAllowance,
       }}
       children={children}
