@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 function TopBar({ setNotification }) {
-  const menus = ["Dashboard", "Staking", "History"];
+  const menus = ["Dashboard", "Staking", "FAQ"];
 
   return (
     <>
