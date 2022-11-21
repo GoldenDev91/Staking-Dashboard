@@ -72,7 +72,7 @@ const Staking = ({ setNotification }) => {
     if (!isNaN(claim) && claim > 0) setClaimable(claim);
   };
   useEffect(() => {
-    //setInterval(() => calcClaimable(), 200);
+    setInterval(() => calcClaimable(), 200);
   }, []);
 
   useEffect(() => calcClaimable(), [accountlockinfo.depositDate]);
@@ -850,8 +850,6 @@ const Panel = styled(Box)`
   padding: 3rem;
   border-radius: 2rem;
   background: #16182d;
-  //background: #1f2228;
-  //#0047ff #57048a;
   width: 100%;
   @media screen and (max-width: 615px) {
     padding: 2rem 1.5rem;

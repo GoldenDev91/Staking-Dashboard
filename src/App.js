@@ -6,10 +6,8 @@ import { Box } from "@mui/material";
 import styled from "styled-components";
 import Dashboard from "./pages/Dashboard";
 import Staking from "./pages/Staking";
-import History from "./pages/History";
-import FAQ from "./pages/FAQ";
-import Home from "./pages/Home";
 import TopBar from "./components/TopBar/TopBar";
+import FAQ from "./pages/FAQ";
 
 import "./App.css";
 import Notification from "./components/Notification";
@@ -40,18 +38,13 @@ function App() {
   return (
     <BrowserRouter>
       <StyledContainer>
-        {/* <TopBar
+        <TopBar
           setNotification={setNotification}
           curpage={curpage}
           setCurPage={setCurPage}
-        /> */}
+        />
+
         <Routes>
-          <Route
-            exact
-            path="/"
-            element={<Home setNotification={setNotification} />}
-            // element={<Navigate to={"/dashboard"}
-          />
           <Route
             exact
             path="/dashboard"
@@ -64,14 +57,10 @@ function App() {
           />
           <Route
             exact
-            path="/history"
-            element={<History setNotification={setNotification} />}
-          />
-          <Route
-            exact
             path="/faq"
             element={<FAQ setNotification={setNotification} />}
           />
+          <Route exact path="/" element={<Navigate to={"/dashboard"} />} />
         </Routes>
       </StyledContainer>
 
