@@ -358,7 +358,7 @@ const Dashboard = ({ setNotification }) => {
           {/* <Panel my={"24px"}>
             <RewardPanel>
               <Box>
-                <Box fontWeight={"500"}>ERC20 Reflected </Box>
+                <Box fontWeight={"500"}>FlokiGiving Reflected </Box>
                 <Box
                   fontWeight={"bold"}
                   fontSize={"32px"}
