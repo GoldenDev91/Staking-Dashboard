@@ -83,7 +83,7 @@ const web3Modal = new Web3Modal({
         darkMode: true, // Optional. Use dark theme, defaults to false
       },
     },
-    "custom-binancechainwallet": {
+    /*"custom-binancechainwallet": {
       display: {
         logo: "/images/binance.png",
         name: "Binance Chain Wallet",
@@ -108,7 +108,7 @@ const web3Modal = new Web3Modal({
         }
         return provider;
       },
-    },
+    },*/
   },
 });
 
@@ -176,6 +176,9 @@ export const Web3ContextProvider = ({ children }) => {
   // connect - only runs for WalletProviders
   const connect = useCallback(async () => {
     try {
+      await web3Modal.updateTheme({
+        "max-width": "700px",
+      });
       const rawProvider = await web3Modal.connect();
       if (rawProvider.type === "error") {
         web3Modal.clearCachedProvider();

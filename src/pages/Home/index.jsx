@@ -65,10 +65,9 @@ const Home = ({ setNotification }) => {
     if (!isNaN(claim) && claim > 0) setClaimable(claim);
   };
 
-  useEffect(
-    () => calcClaimable(),
-    [accountlockinfo, accountlockinfo.depositDate]
-  );
+  useEffect(() => {
+    calcClaimable();
+  }, [accountlockinfo, accountlockinfo.depositDate]);
 
   function numberWithCommas(x) {
     if (!x) return;
@@ -326,7 +325,7 @@ const Home = ({ setNotification }) => {
           </Panel>
           <Panel>
             <Box fontSize={"12px"} color={"#CCC"}>
-              Claimable
+              Claimable (estimated)
             </Box>
             <RowLayout
               fontSize={"25px"}
