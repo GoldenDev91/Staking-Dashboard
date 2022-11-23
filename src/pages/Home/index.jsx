@@ -100,7 +100,7 @@ const Home = ({ setNotification }) => {
       fetchAccountLockData();
       fetchLockData();
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       figureError(error, setNotification);
     }
     setPending(false);
