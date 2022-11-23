@@ -156,3 +156,8 @@ a:hover svg {
 .MuiCheckbox-root {
   color: #f50057 !important;
 }
+
+.web3modal-modal-card {
+  max-width: 600px !important;
+}
+
