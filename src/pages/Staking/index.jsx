@@ -338,7 +338,7 @@ const Staking = ({ setNotification }) => {
       <Box>
         <Panel maxWidth={"650px"}>
           <Box fontSize={"32px"} fontWeight={"600"}>
-            Participate FlokiGiving Stake
+            Participate Dragon Chain ERC Stake
           </Box>
           {/* <ButtonGroup active={activeDay + 1}>
             {days.map((data, i) => {
@@ -524,7 +524,7 @@ const Staking = ({ setNotification }) => {
           <Panel my={"24px"}>
             <RewardPanel>
               <Box>
-                <Box fontWeight={"500"}>FlokiGiving Claimable (estimated)</Box>
+                <Box fontWeight={"500"}>Dragon Chain ERC Claimable (estimated)</Box>
                 <Box
                   fontWeight={"bold"}
                   fontSize={"32px"}
@@ -590,7 +590,7 @@ const Staking = ({ setNotification }) => {
           <Panel my={"24px"}>
             <RewardPanel>
               <Box>
-                <Box fontWeight={"500"}>FlokiGiving Earned </Box>
+                <Box fontWeight={"500"}>Dragon Chain ERC Earned </Box>
                 <Box
                   fontWeight={"bold"}
                   fontSize={"32px"}
@@ -632,7 +632,7 @@ const Staking = ({ setNotification }) => {
           {/* <Panel my={"24px"}>
             <RewardPanel>
               <Box>
-                <Box fontWeight={"500"}>FlokiGiving Reflected </Box>
+                <Box fontWeight={"500"}>Dragon Chain ERC Reflected </Box>
                 <Box
                   fontWeight={"bold"}
                   fontSize={"32px"}
@@ -703,7 +703,7 @@ const Staking = ({ setNotification }) => {
           </Panel> */}
           <Panel my={"24px"}>
             <Box fontWeight={"500"} color={"#9ca0d2"}>
-              FlokiGiving Staked{" "}
+              Dragon Chain ERC Staked{" "}
             </Box>
             <Box
               fontWeight={"bold"}
