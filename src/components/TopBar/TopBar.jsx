@@ -5,14 +5,13 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 function TopBar({ setNotification }) {
-  const menus = ["Dashboard", "Staking", "FAQ"];
+  const menus = ["Dashboard", "Staking"];
 
   return (
     <>
       <StyledContainer>
         <Box>
-          <LogoSVG>
-          </LogoSVG>
+          <LogoSVG></LogoSVG>
           <Menus>
             {menus.map((data, i) => {
               return (
